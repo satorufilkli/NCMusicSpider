@@ -1,1 +1,4 @@
 venv
+.env
+.ropeproject
+src/__pycache__
