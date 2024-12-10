@@ -1,5 +1,6 @@
-from src.playlist_crawler import get_songs
-from src.dl_urls_crawler import get_dl_urls
+from crawlers.playlist_crawler import get_songs
+from crawlers.dl_urls_crawler import get_dl_urls
+from save_to_json import save_to_json
 
 def print_songs_info(songs):
     for song in songs:
@@ -17,8 +18,9 @@ def print_dl_urls(dl_urls):
         )
 
 def main():
-    songs = get_songs(12971562563,5)
-    print_dl_urls(get_dl_urls(songs,"exhigh"))
+    songs = get_songs(12971562563)
+    save_to_json(songs)
+    # save_to_json(get_dl_urls(songs,"hires"))
 
 if __name__ == "__main__":
     main()

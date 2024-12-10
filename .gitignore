@@ -1,4 +1,4 @@
 venv
 .env
 .ropeproject
-src/__pycache__
+crawlers/__pycache__
