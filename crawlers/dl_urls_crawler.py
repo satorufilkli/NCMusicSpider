@@ -1,36 +1,42 @@
 import requests
-
+from urllib.parse import urlencode
 from .config import DOWNLOAD_API, HEADERS, COOKIE,TIMESTAMP
-def get_dl_urls(songs,level):
-    dl_urls=[]
-    for song in songs:
+
+def get_dl_urls(songs_info,level):
+    songs_with_url=[]
+    for song in songs_info:
         song_id = song['id']
         song_name = song['name']
-        print(f"正在获取“{song_name}”……")
-        payload = {
+        song_artist = song['artist']
+        print(f"正在获取{song_name}:{song_id}……")
+
+        params = {
             "id": song_id,
             "level": level,
             "timestamp": TIMESTAMP,
-            "cookie" : COOKIE
+            "cookie": COOKIE
         }
+
+        url = f"{DOWNLOAD_API}?{urlencode(params)}"
+
         try:
-            response = requests.post(
-                DOWNLOAD_API,
-                json=payload,
-                headers=HEADERS,
+            response = requests.get(
+                url,
+                headers=HEADERS
             )
             response.raise_for_status()
             data = response.json()
-            dl_url = {
-                "name" : song_name,
-                "url" : data["data"][0]["url"],
-                "br" : data["data"][0]["br"]
+            song_with_url = {
+                "name": song_name,
+                "artist": song_artist,
+                "url": data["data"][0]["url"],
+                "br": data["data"][0]["br"]
             }
-            dl_urls.append(dl_url)
+            songs_with_url.append(song_with_url)
         except requests.exceptions.RequestException as e:
             print(f"Request failed for {song_name}: {e}")
         except (KeyError, IndexError) as e:
             print(f"Failed to parse response for {song_name}: {e}")
         except Exception as e:
             print(f"Unexpected error for {song_name}: {e}")
-    return dl_urls
+    return songs_with_url

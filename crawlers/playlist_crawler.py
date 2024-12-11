@@ -1,27 +1,32 @@
 import requests
-from .config import PLAYLIST_API,HEADERS,TIMESTAMP
+from urllib.parse import urlencode
+from .config import PLAYLIST_API,HEADERS, TIMESTAMP
+
 def get_songs(playlist_id,limit_num=None):
     songs=[]
-    payload = {
+    params = {
         "id": playlist_id,
         "limit": limit_num,
         "timestamp": TIMESTAMP,
     }
+
+    url = f"{PLAYLIST_API}?{urlencode(params)}"
+
     try:
         response = requests.post(
-            PLAYLIST_API,
-            json=payload,
+            url,
             headers=HEADERS,
         )
         response.raise_for_status()
         data = response.json()
         for i in range (len(data['songs'])):
-            song = data['songs'][i]
+            song = data
             song = {
-                'id': song['id'],
-                'name' : song['name'],
-                'artist' : song['ar'][0]['name'],
-                'album' : song['al']['name']
+                'id': song['songs'][i]['id'],
+                'name' : song['songs'][i]['name'],
+                'artist' : song['songs'][i]['ar'][0]['name'],
+                'album' : song['songs'][i]['al']['name'],
+                'picUrl' : song['songs'][i]['al']['picUrl'],
             }
             songs.append(song)
     except Exception as e:
