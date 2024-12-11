@@ -1,4 +1,5 @@
 venv
 .env
 .ropeproject
-crawlers/__pycache__
+__pycache__
+download/links.txt
