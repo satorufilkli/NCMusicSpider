@@ -8,6 +8,7 @@ def get_dl_urls(songs_info,level):
         song_id = song['id']
         song_name = song['name']
         song_artist = song['artist']
+        song_picUrl = song['picUrl']
         print(f"正在获取{song_name}:{song_id}……")
 
         params = {
@@ -27,8 +28,10 @@ def get_dl_urls(songs_info,level):
             response.raise_for_status()
             data = response.json()
             song_with_url = {
+                "id" : song_id,
                 "name": song_name,
                 "artist": song_artist,
+                "picUrl" : song_picUrl,
                 "url": data["data"][0]["url"],
                 "br": data["data"][0]["br"]
             }
