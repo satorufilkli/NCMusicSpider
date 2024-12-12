@@ -41,6 +41,27 @@
 
 
 
+### 新增功能 
+
+- **add_music_tags**
+  - 使用mutagen库给音乐文件打上信息标签，强迫症福音！写入音乐文件的封面和基本信息，使用本地播放器或者文件浏览器是会舒服很多
+
+
+
+### 效果演示
+
+![get_songs](./images/1.png)
+
+![downloader.sh](./images/2.png)
+
+![batch_process_songs](./images/3.png)
+
+![效果1](./images/4.png)
+
+![效果2](./images/5.png)
+
+
+
 ## 环境变量配置
 
 在 `.env` 文件中配置以下信息：
