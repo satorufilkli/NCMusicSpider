@@ -197,7 +197,7 @@ class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("NCMUSICSPIDER - 音乐下载器")
+        self.setWindowTitle("NCMusicSpider ")
         self.setGeometry(100, 100, 950, 750) # 调整默认界面大小，稍微增大以便容纳卡片间距
 
         self.central_widget = QWidget()
