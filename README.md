@@ -10,15 +10,15 @@
 
 ## 使用事例
 
-![图1](.images\1.png)
+![图1](./images/1.png)
 
-![图2](.images\2.png)
+![图2](./images/2.png)
 
 
 
 日志
 
-![图3](.images\3.png)
+![图3](./images/3.png)
 
 
 
